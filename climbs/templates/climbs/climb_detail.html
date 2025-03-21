@@ -1,0 +1,15 @@
+<h1>{{ climb }}</h1>
+<p>Start Date: {{ climb.start_date }}</p>
+<p>End Date: {{ climb.end_date }}</p>
+<p>Mountain: {{ climb.mountain.name }}</p>
+<p>Climbers:</p>
+<ul>
+{% for climber in climb.climbers.all %}
+    <li>{{ climber.name }}</li>
+{% endfor %}
+</ul>
+<a href="{% url 'climb_update' climb.pk %}">Edit</a>
+<form action="{% url 'climb_delete' climb.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>

@@ -1,0 +1,7 @@
+<h1>Climbs</h1>
+<ul>
+{% for climb in climbs %}
+    <li><a href="{% url 'climb_detail' climb.pk %}">{{ climb }}</a></li>
+{% endfor %}
+</ul>
+<a href="{% url 'climb_create' %}">Add new climb</a>
