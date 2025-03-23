@@ -20,7 +20,7 @@
 Склонируйте репозиторий с проектом:
 
 ```bash
-git clone https://github.com/ваш-репозиторий/alpine_club.git
+git clone git@github.com:Rijo-ru/alpine_club.git
 cd alpine_club
 ```
 
