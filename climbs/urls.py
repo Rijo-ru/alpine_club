@@ -3,8 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.climb_list, name='climb_list'),
-    path('<int:pk>/', views.climb_detail, name='climb_detail'),
-    path('new/', views.climb_create, name='climb_create'),
-    path('<int:pk>/edit/', views.climb_update, name='climb_update'),
-    path('<int:pk>/delete/', views.climb_delete, name='climb_delete'),
+    path('add_mountain/', views.add_mountain, name='add_mountain'),
+    path('add_climber/', views.add_climber, name='add_climber'),
+    path('add_climb/', views.add_climb, name='add_climb'),
 ]

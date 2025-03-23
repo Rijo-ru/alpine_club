@@ -1,36 +1,41 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Mountain, Climber, Climb
+from django.shortcuts import render, redirect
+from .forms import MountainForm, ClimberForm, ClimbForm
+from .models import Climb
+
+def home(request):
+    climbs = Climb.objects.all()
+    return render(request, 'climbs/home.html', {'climbs': climbs})
 
 def climb_list(request):
     climbs = Climb.objects.all()
     return render(request, 'climbs/climb_list.html', {'climbs': climbs})
 
-def climb_detail(request, pk):
-    climb = get_object_or_404(Climb, pk=pk)
-    return render(request, 'climbs/climb_detail.html', {'climb': climb})
-
-def climb_create(request):
-    if request.method == "POST":
-        # Обработка данных формы
-        pass
+def add_mountain(request):
+    if request.method == 'POST':
+        form = MountainForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('climb_list')
     else:
-        # Отображение формы
-        pass
-    return render(request, 'climbs/climb_form.html')
+        form = MountainForm()
+    return render(request, 'climbs/add_mountain.html', {'form': form})
 
-def climb_update(request, pk):
-    climb = get_object_or_404(Climb, pk=pk)
-    if request.method == "POST":
-        # Обработка данных формы
-        pass
+def add_climber(request):
+    if request.method == 'POST':
+        form = ClimberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('climb_list')
     else:
-        # Отображение формы
-        pass
-    return render(request, 'climbs/climb_form.html', {'climb': climb})
+        form = ClimberForm()
+    return render(request, 'climbs/add_climber.html', {'form': form})
 
-def climb_delete(request, pk):
-    climb = get_object_or_404(Climb, pk=pk)
-    if request.method == "POST":
-        climb.delete()
-        return redirect('climb_list')
-    return render(request, 'climbs/climb_confirm_delete.html', {'climb': climb})
+def add_climb(request):
+    if request.method == 'POST':
+        form = ClimbForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('climb_list')
+    else:
+        form = ClimbForm()
+    return render(request, 'climbs/add_climb.html', {'form': form})
